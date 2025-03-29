@@ -1,36 +1,48 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+
 function App() {
+  let [count,setCount]=useState(1)
   return (
     <div>
-      <Todo id={3} />
+     <button onClick={function (){
+      setCount(1);
+     }}>1</button>
+      <button onClick={function (){
+      setCount(2);
+     }}>2</button>
+       <button onClick={function (){
+      setCount(3);
+     }}>3</button>
+       <button onClick={function (){
+      setCount(4);
+     }}>4</button>
+     <Todo id={count}/>
     </div>
-  );
+  )
 }
 
+
+
 function Todo({ id }) {
-  const [todo, setTodo] = useState(null);
+  const [todo, setTodo] = useState({});
 
   useEffect(() => {
     axios
       .get(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then((response) => {
-        setTodo(response.data);
+      .then( (response) => {
+         setTodo(response.data);
       })
-      .catch((error) => {
-        console.error("Error fetching todo:", error);
-      });
+     
   }, [id]);
-
-  if (!todo) {
-    return <p>Loading...</p>;
-  }
+ 
 
   return (
     <div>
+      Id:{id}
       <h1>{todo.title}</h1>
-      <p>Status: {todo.completed ? "Completed ✅" : "Pending ⏳"}</p>
+      <p>{todo.completed }</p>
     </div>
   );
 }
