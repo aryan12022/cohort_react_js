@@ -1,50 +1,35 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-
 
 function App() {
-  let [count,setCount]=useState(1)
-  return (
-    <div>
-     <button onClick={function (){
-      setCount(1);
-     }}>1</button>
-      <button onClick={function (){
-      setCount(2);
-     }}>2</button>
-       <button onClick={function (){
-      setCount(3);
-     }}>3</button>
-       <button onClick={function (){
-      setCount(4);
-     }}>4</button>
-     <Todo id={count}/>
-    </div>
-  )
-}
 
-
-
-function Todo({ id }) {
-  const [todo, setTodo] = useState({});
+  const [inpu, setInput] = useState(1);
+  const [sum, setSum] = useState(1);
 
   useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then( (response) => {
-         setTodo(response.data);
-      })
-     
-  }, [id]);
- 
+    let c = 0;
+    for (let i = 1; i <= inpu; i++) {
+      c += i;
+    }
+    setSum(c);
+  }, [inpu]);
 
   return (
     <div>
-      Id:{id}
-      <h1>{todo.title}</h1>
-      <p>{todo.completed }</p>
+      <input
+        type="number"
+        onChange={(e) => {
+          setInput(parseInt(e.target.value) || 1);
+        }}
+        placeholder="Find sum from 1 to n"
+      />
+      <br />
+      Sum from 1 to {inpu} is {sum}
+      
+   
+    
     </div>
   );
 }
 
 export default App;
+ 
