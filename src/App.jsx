@@ -1,18 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 function App() {
-
+  const [counter,setCounter]= useState(0)
   const [inpu, setInput] = useState(1);
-  const [sum, setSum] = useState(1);
+  
 
-  useEffect(() => {
-    let c = 0;
-    for (let i = 1; i <= inpu; i++) {
-      c += i;
-    }
-    setSum(c);
-  }, [inpu]);
-
+let count=useMemo(()=>{
+  console.log("memo");
+  let finalcount=0;
+  for(let i=1;i<=inpu;i++){
+    finalcount=finalcount+i;
+  }
+ return finalcount;
+  
+},[inpu])
+ 
+  // useEffect(() => {
+  //   setSum((inpu * (inpu + 1)) / 2);
+  // }, [inpu]);
+  
   return (
     <div>
       <input
@@ -23,10 +29,13 @@ function App() {
         placeholder="Find sum from 1 to n"
       />
       <br />
-      Sum from 1 to {inpu} is {sum}
-      
-   
-    
+      Sum from 1 to {inpu} is {count};
+      <br />
+      <button
+      onClick={()=>{
+        setCounter(counter+1); 
+      }
+      }>counter {counter}</button>
     </div>
   );
 }
