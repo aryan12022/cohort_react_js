@@ -1,27 +1,11 @@
-import { useState, useMemo, useCallback,
-   useEffect,
-   useRef} from "react";
+import { Assignment1 } from "./Components/Assignment1"
 
-
-
+// assignment 1
 function App(){
- const [incomeTax,setIncomeTax]=useState(2000)
-  
-const divref =useRef();
+return <>
+<Assignment1/>
 
-useEffect(()=>{
-  setTimeout(() => {
-    console.log(divref.current);
-    divref.current.innerHTML=10
-  }, 5000);
- 
-},[])
-
-return (
-  <div>
-  hi there , your income tax returns are <div ref={divref}>{incomeTax}</div>
-  </div>
-)
+</>
   
 }
 export default App 
